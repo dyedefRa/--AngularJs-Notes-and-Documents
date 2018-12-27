@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope, $http) {
+
+            $scope.eylem = function () {
+                var gidecekData={ 'ad': $scope.adi, 'sayi': $scope.sayicik };
+                $http.post('http://localhost:50770/Home/Deneme', gidecekData).then(function (deger) {
+                    alert(deger.aciklama);
+                });
+            }
+
+        });
+    </script>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    {{4+2}}
+    <hr> AD :
+    <input type="text" ng-model="adi"> sOyad:
+    <input type="number" ng-model="sayicik">
+    <button ng-click="eylem()">GO</button>
+</body>
+
+</html>

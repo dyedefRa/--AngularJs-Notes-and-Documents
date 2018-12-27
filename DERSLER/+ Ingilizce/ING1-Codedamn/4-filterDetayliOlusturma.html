@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.filter('filtrem', function () {
+            var deger = function (sayim, kokum) {
+                //ONEMLI OLAN fonksiyonun parametreleri.. ve aşagıdan filtre ile alma tarzımız!
+
+                var sayi = parseInt(sayim, 10);
+                var kok = parseInt(kokum, 10);
+                if (kokum <= 1 || kokum >= 37 || isNaN(sayi) || isNaN(kok)) return sayim;
+                // return sayi.toString(kok);
+                return sayi * kok;
+
+            }
+            return deger;
+        });
+        app.controller('mycont', function ($scope) {
+
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+    <h2>Taban Aritmetiği</h2>
+    Sayı :
+    <input type="number" ng-model="sayi">
+    <br> Kok Derecesi :
+    <input type="number" ng-model="kok">
+    <!-- FILTREEEEEE ONEMLIII -->
+    <br> Sayi = {{sayi}} - Kok Derecen = {{kok}} - - - -=> Sonuç : {{sayi | filtrem:kok}}
+
+
+</body>
+
+</html>

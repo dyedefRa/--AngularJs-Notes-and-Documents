@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ng-class='{"CLASSNAME":"NG MODEL ISMI (CHECKBOX)"}' -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+
+        });
+    </script>
+    <style>
+        .ss {
+            width: 300px;
+            height: 200px;
+            background-color: dimgray;
+        }
+
+        /* .ustunecşzgi{
+            text-decoration:overline;
+        } */
+
+        .ustcizgiliC {
+            text-decoration: line-through;
+        }
+
+        .altcizgiliC {
+            text-decoration: underline;
+        }
+
+        .kalinC {
+            font-weight: bold;
+        }
+
+        .teletypeC {
+            text-decoration: underline overline  dotted red;
+        }
+
+        .italicC {
+            font-style: italic;
+        }
+
+        .codeC {
+            text-decoration: underline overline wavy blue;
+
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    GIZLE GOSTER OLAYI{ Gizle/Göster
+    <input type="checkbox" name="" ng-model="check" id="">
+
+    <div ng-if="check" class="ss">SELAM DOSTLAR</div>
+    } GIZLE GOSTER OLAYI
+
+    <hr>
+    <hr>
+
+    <s> Üstü Çizgili </s>:
+    <input type="checkbox" name="" ng-model="ustcizgili" id="">
+    <br>
+    <u> Alt Çizgili </u>:
+    <input type="checkbox" name="" ng-model="altcizgili" id="">
+    <br>
+    <b>Kalın </b> :
+    <input type="checkbox" name="" ng-model="kalin" id="">
+    <br>
+    <tt>TeleType </tt>:
+    <input type="checkbox" name="" ng-model="teletype" id="">
+    <br>
+    <i>Italic</i>
+    <input type="checkbox" name="" ng-model="italic" id="">
+    <br>
+    <code>Code</code>
+    <input type="checkbox" name="" ng-model="code" id="">
+
+    <hr>
+    <br>
+
+
+    <div ng-class="{ustcizgiliC:ustcizgili,altcizgiliC:altcizgili,kalinC:kalin,teletypeC:teletype,italicC:italic,codeC:code}"> Bu yazının şekli değişecek</div>
+    <hr>
+</body>
+
+</html>

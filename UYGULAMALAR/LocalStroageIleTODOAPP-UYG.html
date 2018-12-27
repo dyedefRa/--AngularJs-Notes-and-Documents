@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+
+<!-- <span contenteditable="false" ng-keyup="enterAgain"  ng-dblclick="editle()" ng-model="item.mesaj">{{item.mesaj}}</span> -->
+
+<!-- BURASI COK ONEMLI conteneditable='true' => edit edilebilir .. yani içindeki yazı degısebılır. iki kez tıklandığında düzenlemeye
+geçsin. yine iki kez tıklandıgında normale donsun.. -->
+
+<!-- OZEEEETTT @@@@@ -->
+<!-- Eklenilen görevlerin üstüne double click yapıldıgında contenteditable="false" attrbutesini true ya cevırıyoruz..True olunca ıcıne yazı yazılabılıyor . Ve 
+span[contenteditable="true"]  ile buna css verdık. Aynı anda her goreve ng-keyup ozellıgı verdık.bır fonk atadık bu fonk enter tusuna basıldıgında tekrardan ontenteditable="false" yapıyoruz. ve editleme olayı bıtıyor.  -->
+<!-- ------------------------ -->
+<!-- JSON.parse()         =>>>> Parametre olarak JSON alır ve geriye Dizi Döner
+JSON.stringify($scope.dizi) =>>> Parametre olarak dizi alır ve geriye JSON DÖner -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .hh {
+            text-align: center;
+        }
+
+        .ss {
+
+            display: block;
+            margin: 0 auto;
+            padding: 5px;
+
+            font-size: 15px;
+
+            width: 200px;
+
+        }
+
+        .gizle {
+            /* visibility: hidden; */
+            display: none;
+
+        }
+
+        .yap-true {
+            text-decoration: line-through;
+
+            color: red;
+
+        }
+
+        ul li {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* BURASI ONEMLI @@@@@@@@@@@@@ */
+
+        span[contenteditable="true"] {
+
+            background-color: rgb(218, 218, 218);
+            padding: 3px;
+
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+            $scope.dizi = [];
+
+            //LOCALSTORAGE 
+            //JSON.Parse() Metodu onemlı. Json ifadesini parametre olarak alır ve dizidöner.
+            var taskData = localStorage['gorevListesi'];
+            if (taskData !== undefined) {
+                $scope.dizi = JSON.parse(taskData);
+            }
+            console.log($scope.dizi);
+            console.log(taskData);
+
+            //
+
+
+
+
+            $scope.eylem = function () {
+
+                if (event.which == 13) {
+                    $scope.gorevEkle();
+                    $scope.icerik = "";
+                }
+            };
+            $scope.gorevEkle = function () {
+                if ($scope.icerik) {
+                    $scope.dizi.push({ 'mesaj': $scope.icerik, 'durum': false });
+
+                    //BURASI LOCALSTORAGE ILE ALAKALI
+                    localStorage['gorevListesi'] = JSON.stringify($scope.dizi);
+                    console.log(localStorage);
+
+                }
+            };
+            $scope.editle = function (mesaj) {
+                //GUNCELLEME OLAYI ONEMLI!!!!!!!!!!
+                //MESAJI PARAMETREYLE ATIYORUZ.
+                //GELEN MESAJI DIZIDE GEZIP O GOREVI BULUYORUZ
+                //event.target Metoduyla yenı ısmın alıyoruz.
+                //Sonundada diziyi guncelleyecegız.
+
+                //Check e tıklayınca
+                if (mesaj == true || mesaj == false) {
+                    localStorage['gorevListesi'] = JSON.stringify($scope.dizi);
+
+                } else {
+                    var goreviAl = $scope.dizi.find(x => x.mesaj == mesaj);
+                    goreviAl.mesaj = event.target.innerText;
+                    localStorage['gorevListesi'] = JSON.stringify($scope.dizi);
+
+                    event.target.contentEditable = event.target.contentEditable == 'false' ? 'true' : 'false';
+
+                }
+
+            };
+
+            $scope.enterAgain = function (mesaj) {
+                if (event.which == 13) {
+                    $scope.editle(mesaj);
+                }
+            };
+            //FARE UZERINDEN GITTIGINDE NORMALE DONSUN
+            // $scope.mouseLeave = function () {
+            //     if (event.target.contentEditable) {
+            //         event.target.contentEditable = "false";
+            //     }
+            // }
+        });
+
+    </script>
+
+</head>
+
+<body ng-controller="mycont">
+    <h2 class="hh">Görev Ekle</h2>
+    <input ng-keyup="eylem()" ng-model="icerik" class="ss" type="text">
+    <hr>
+    <ul>
+        <!-- SIL BUTONUNA TIKLARSAN  o eklenen nesnenın .durum propertisini silindi yapsın.  VE ->
+        Nesnenin .durum propertisi silindi oldugunda gizle sınıfını ATA -->
+        <!-- <li ng-class="{'gizle':item.durum=='silindi'}" ng-repeat="item in dizi">{{item.mesaj}} <button ng-click="item.durum='silindi'">Sil</button></li> -->
+
+        <!-- BURADAKI => track by $index  => ngRepeat:dupes
+Duplicate Key in Repeater HATASINI KALDIRDI !!!! -->
+        <li class="yap-{{item.durum}}" ng-repeat="item in dizi track by $index">
+            <input type="checkbox" ng-change="editle(item.durum)" ng-model="item.durum" name="" id="">
+            <span contenteditable="false" ng-mouseleave="mouseLeave()" ng-keydown="enterAgain(item.mesaj)" ng-dblclick="editle(item.mesaj)"
+                ng-model="item.mesaj">{{item.mesaj}}</span>
+    </ul>
+
+
+</body>
+
+</html>

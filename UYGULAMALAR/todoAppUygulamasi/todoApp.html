@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+
+<!-- Form'a ng-submit="function()" 
+ve name="forum" ..dedik..
+içeride submit butonu yazdık ve bu butona ng-disabled="forum.$invalid" dedik!!!
+
+True false =>
+class atama olayı
+<span ng-class="{'okey':item.isDone}">{{item.ad}}</span> -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="main.js"></script>
+
+    <title>Document</title>
+    <style>
+      
+        .selam {
+            list-style-type: none;
+            padding: 5px;
+            color: red;
+            font-size: 20px;
+        }
+
+        .okey {
+            color: green;
+            text-decoration: line-through;
+        }
+        .ng-untouched{
+           background-color:thistle;
+           
+        } 
+    </style>
+
+</head>
+
+<body>
+    <div class="container border border-primary py-5 px-5" ng-controller="todocont">
+
+
+        <h1 class="text-center">Yapılacaklar</h1>
+
+
+        <div class="row mx-2">
+            <div class="col-sm-8">
+                <ul>
+
+                    <li class="selam" ng-repeat="item in todochoices">
+                        <input type="checkbox" ng-model=item.isDone>&nbsp;
+                        <span ng-class="{'okey':item.isDone}">{{item.ad}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-4 border border-info text-center pt-4 ">
+                <h5> Yeni Ekle :</h5>
+                <form class="p-3" name="forum" ng-submit="yenitodoekle()" novalidate>
+                    İsim :
+                    <input required class="form-control" placeholder="İsim Giriniz" type="text" ng-model="yenitodo">
+                    <br>
+                    <!-- BURASI ONEMLI ABI -->
+                    <button ng-disabled="forum.$invalid" class="btn btn-success" type="submit">Ekle</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="offset-sm-1 col-sm-4 mt-4">
+                <button class="btn btn-danger" ng-click="yapilansil()">Yapılanları Sil</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

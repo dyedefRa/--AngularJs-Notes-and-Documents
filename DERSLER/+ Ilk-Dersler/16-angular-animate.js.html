@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Onemli Olan sey. ngAnimate yazmak ve hide olayi tetiklendiginde .ng-hide a düşmesi -->
+<!-- Resme sonradan resimc clasını ekledım.Normalde butona tıkladıgımda statik olarak classı eklıyorduk ve efekt calısıyordu.Sadece checkbox ıle hide ozellıgını tetıkledıgımde uygulamıyordu anımasyonu.Bunun sebebı transition olayını gormuyor olusu elementın.. -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .resimc{
+        height: 300px;
+        width: 500px;
+      transition:all 2s ;
+      /* TRANSITION OLMADAN ANIMASYON OLMUYOR */
+    }
+    #resim.ng-hide{
+        /* HIDE OLAYI CALISTIGINDA BURAYA DUSUYOR */
+width: 600px;
+height: 400px;
+/* opacity: 0; */
+transform: rotate(360deg);
+
+    }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+<input type="checkbox" ng-model="sas">    <button ng-click="eylem()">Göster/Gizle</button>
+    <hr>
+    <img id="resim" class="resimc"  ng-hide="sas" src="http://www.enter.news/uploads/news/medium/2018/01/121293.jpg" alt="">
+    <hr>
+
+
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"></script>
+    <script>
+        // @@BURASI ONEMLI ngAnimate =>
+        var app = angular.module('myapp', ['ngAnimate']);
+        app.controller('mycont', function ($scope) {
+
+            $scope.deger = false;
+            $scope.eylem = function () {
+
+                $scope.deger = !$scope.deger;
+                //jQuery ortak metodu hatırlamak ıcın yazdım .
+                angular.element(resim).addClass('resimc');
+            }
+
+
+        });
+    </script>
+
+</body>
+
+</html>

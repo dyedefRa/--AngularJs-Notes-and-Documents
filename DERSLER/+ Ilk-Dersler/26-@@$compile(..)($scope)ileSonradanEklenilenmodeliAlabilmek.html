@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- SAYFAYA SONRADAN APPEND EDILEN EKLENEN ELEMANLARI  GOREMIYORUZ.
+    bir input ekledıgınde ng-model='kutu' verdiğinde o degere {{kutu}} ulaşaamlıyorusn. Çözüm =>  @@@@@@    // $compile(icerik)($scope)
+ jQuery'de live olayı..
+ burada $compile -->
+
+
+<!-- @@@@@@    // $compile(icerik)($scope)
+icerik => ng-model ile append yardımıyla sonradan ekledıgımız zımbırtılar. -->
+
+<html lang="en">
+<!-- SONRADAN BIR ng-model ekliyoruz input turunde. ve degerını almak ıstıyoruz. Herhangi bir fonk ya bu degerı kullanacagız ama ulaşamıyoruz. çunku o ınputa ng-model felan yazdık okey ama sonradan ekledıgımız ıcın gormuyor.. -->
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .kilas {
+            background-color: red;
+        }
+
+        .pekala {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', []);
+
+        app.directive('ozelim', function ($compile) {
+
+            return {
+                //   transclude:true,
+                //TEMPLATE ILE GORDU AMA LINK ILE ALTTA APPEND EDINCE GORMEYECEK ng-model="directivengelen"  O YUZDEN $COMPILE LAZIM!!!
+
+                // template: ' DIRECTIVE ICERIGI : <div ng-transclude></div>  <input type:"text" ng-model="directivengelen">',
+
+
+                //------------------------------------------------------
+                //BURASI COMPILESIZ =>>> (Burayı gormuyor)
+
+                // link: function ($scope, $element, $attr) {
+                //     $element.append('<input type:"text" ng-model="directivengelen">');
+                // }
+                //------------------------------------------------------
+                //Append ettik ve compile kullandık. 
+                link: function ($scope, $element, $attr) {
+                    $element.append($compile('<input type:"text" ng-model="directivengelen">')($scope));
+                }
+            }
+        });
+
+
+        //-------------------------------------------------
+        //YUKARIDA DIRECTIVE ILE ORNEK VERDIK BURDADA FARKLI BIR ORNEK VAR
+        app.controller('mycont', function ($scope, $compile) {
+
+            // $compile(icerik)($scope)
+            angular.element(tamam).append(
+                $compile('<input type="text" ng-model="pekala" placeholder="isim yaz"> ')($scope)
+            );
+
+
+            // BURADA id si tamam olan elemanın ıcıne pekala adlı ng-modelımızı ekledık. VE $compile olayı burada olmalı.
+
+
+            angular.element(tamam).addClass('kilas');
+
+
+            $scope.eylem = function (a) {
+                alert(a);
+            }
+        });
+    </script>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    {{5+2}}
+    <hr>
+
+    <!-- @@BU DIVE APPEND ILE EKLEDIK YUKARIDAA !! -->
+    <div id="tamam"> SASAF</div>
+
+    <br>
+    <button ng-click="eylem(pekala)">SOYLET</button>(Normalde alttakini görmeyecekti $compile ile eklediimiz için gordu butonda oyle)
+    <br> {{pekala}}
+    <hr>
+    <!-- BURASI DIGER ORNEGE GECTI DIRECTIVE ORNEGI -->
+    <hr>
+    <div ozelim>AHAHA</div>
+    {{directivengelen}}
+</body>
+
+</html>

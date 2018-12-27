@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+DEGER IZLEMEYI GORECEGIZ
+<br> Deger adlı değerimizi takip edelim.
+<br>Deger durumlarına göre metod yazabiliriz..
+<br> İlk parametre izleyeceğin angularValuesi..
+<br> diger parametre zaten callBack..
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <hr>
+    <p>{{deger}}</p>
+    <button ng-click="deger=deger+1">Deger ifadesini artır </button>
+    <button ng-click="deger=0">Degeri Sıfırla</button>
+<br>
+<p style="color:red;">{{uyari}}</p>
+
+
+
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.deger = 0;
+            $scope.uyari = "";
+// BURASI ONEMLI PARAMETRELERINI IYI KES
+            $scope.$watch("deger",function(){
+                // if($scope.deger==2){
+                //     $scope.uyari="Deger 2 oldu bebeğim";
+                // }
+                // else{
+                //     $scope.uyari = "";
+
+                // }
+                if($scope.deger!=0){
+                $scope.uyari= $scope.deger+ '  oldu';
+            }
+            else{
+                $scope.uyari="Şu an için değer 0";
+            }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

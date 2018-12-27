@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- IKI FARKLI SEKILDE ATAYABILIYORUZ VE GET LEYEBILIYORUZ.. -->
+
+<!-- Console dan silmek için => delete localStorage.isim;
+
+localStorage.removeItem('Name') => (İstege bağlı siler)
+
+localStorage.clear() =>> Hepsini siler. (oturumu temizler) -->
+
+<!-- localStorage de ekledıgın zaman sılmeyene kadar kalır. 
+sessionStorage de ise sayfa kapanana kadar kalır -->
+
+<!-- SESSIONSTORAGE DE VAR!!!!!!!!1
+her şey aynı hemen hemen.. Oturum kapatılınca gıdıyor bunda..
+sessionStorage.setItem("234", "ali"); -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+
+    <script>
+
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+            $scope.eylem = function () {
+                localStorage['storage1'] = $scope.st1;
+                localStorage.setItem('storage2', $scope.st2);
+
+                //Almak için=>
+                console.log(localStorage.getItem('storage1'));
+
+                console.log(localStorage['storage2']);
+
+            }
+            $scope.stroageSil = function () {
+                localStorage.removeItem('storage2');
+            }
+        });
+
+
+    </script>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <hr> 1. Storage :
+    <input type="text" ng-model="st1">
+    <br> 2. Storage :
+    <input type="text" ng-model="st2">
+    <br>
+    <button ng-click="eylem()">Storage Ekle</button>
+
+    <hr>
+    <button ng-click="stroageSil()">SIL </button>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- GIDECEK VERIYI FORMDAN CEK
+VE
+FORMA ng-submit='func()' yaz
+asagıdan bu func()'ı tanımla -->
+<!-- SUBMIT ANINI YAKALAMAK ICIN ng-submit diyoruz form elementine.. -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <form name="formName" ng-submit="eylem()">
+        <input ng-model="isim" type="text">
+        <input ng-model="Tc" type="number">
+        <input type="submit" value="Mockapiye Gonder">
+    </form>
+
+
+    <hr>
+
+    <h1>{{yanit}}</h1>
+
+
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope, $http) {
+
+
+            $scope.eylem = function () {
+
+                $scope.gidecekData = {
+
+                    "kitapad": "Angular Dersi -16",
+                    "yazar": "Angular",
+                    "yayinevi": "Ergonomic Cotton Shirt",
+                    "basimyeri": "YALOVA",
+                    "basimyili": "2018-07-17T08:00:04.402Z",
+                    "sayfasayisi": 7601
+                };
+                // BURASI ONEMLI @@@@@@@@
+                $http.post('http://5b5c4fcd6a725000148a6771.mockapi.io/api/Books', $scope.gidecekData).then(function (cevap) {
+                    $scope.yanit = cevap.data;
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- $scope olayi ve ilk myapp controller kullanımı -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <input type="text" ng-model="kutu">
+    <br> {{deger}}<br>
+<input type="button" value="degeri Al" ng-click="ilkfonksiyon(kutu)">
+
+    <hr>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+
+
+
+    <script>
+        var myapp = angular.module('myapp', []);
+        myapp.controller('mycont', function ($scope) {
+
+            $scope.deger = 'deneme ders';
+         
+      
+            $scope.ilkfonksiyon=function(a){
+                alert(a);
+            }
+        })
+
+    </script>
+</body>
+
+</html>

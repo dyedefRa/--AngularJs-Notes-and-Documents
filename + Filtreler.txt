@@ -1,0 +1,48 @@
+{{product.ucret| currency:'TR':2}} => (noktadan sonra 2 sýfýr olsun)
+bu þekilde dolar iþareti cýakcak
+angular.local tr js ý yuklersen tl olcak
+
+--------------------------------
+
+{{ deger | limitTo:4 | uppercase/lowecase }} 
+
+limitTo ile substring yada Take(..) olayi
+
+ng-repeat="item in itemler | limitTo:5" ;=> buradaki ara ng-model="ara"
+5 tane getir.
+YADA
+deger='afasfasfa' olsun
+
+
+--------------------------------
+
+<li ng-repeat="item in itemler | filter:ara |limitTo:4|orderBy:"city">
+((buradaki city => item.city deki city | "-city" dersek orderByDescanding olur))
+
+-----------Date olayi--------------
+{{item.zaman | date}}
+{{item.zaman | date:'short'}}
+{{item.zaman | date:'medium'}}
+{{item.zaman | date:'shortDate'}}
+{{item.zaman | date:'longDate'}}
+{{item.zaman | date:'fullDate'}}
+
+---
+{{item.zaman | date:'shortTime'}}
+
+---------------------------FILTER OLUSTURMA
+
+ app.filter('selam',function(){
+            return function(b){
+            return    b.replace("a","A");
+            }
+        })
+
+>>>>>        {{deger |limitTo:6 |lowercase |selam}}
+--------
+  app.filter('selam',function(){
+            return function(b){
+            return    b.toUpperCase();
+            }
+        })
+-------------------------------------------------

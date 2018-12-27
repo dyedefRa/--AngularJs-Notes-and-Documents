@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"></script>
+
+    <script>
+
+        var app = angular.module('myapp', ['ngAnimate']);
+        app.controller('mycont', function ($scope) {
+
+            $scope.isimler = ['ali', 'veli', 'fatih'];
+
+        });
+    </script>
+    <style>
+    .uyari{
+        background-color: dimgrey;
+        /* display: block; */
+        width: 158px;
+        color:darkred;
+    }
+    .ng-enter{
+        transition: 1s all;
+        margin-left: 200px;
+        opacity: 0;
+
+    }
+    .ng-enter-active{
+ 
+        margin-left: 0;
+    opacity: 1;
+    }
+    .ng-leave{
+        transition: 1s all;
+        margin-left: -20px;
+
+    }
+    .ng-leave-active{
+     
+        margin-left: 200px;
+        opacity: 0;
+    }
+   .ng-hide{
+        transition: 1s all;
+        margin-top: -10px;
+        /* margin-left: 200px; */
+        opacity: 0;
+    }
+
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+<input type="text" ng-model="ara">
+<br>
+<div id="zaa">
+<div ng-show="(isimler|filter:ara).length==0" class="uyari">Sonuç yok</div></div>
+    <ul>
+        <li ng-repeat="isim in isimler | filter:ara">{{isim}}</li>
+    </ul>
+</body>
+
+</html>

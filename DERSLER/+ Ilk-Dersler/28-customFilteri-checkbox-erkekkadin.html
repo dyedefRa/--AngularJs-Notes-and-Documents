@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope, $http) {
+           
+           // $http.get(' http://www.filltext.com/?rows=10&ad={firstName}&yas={number}').then(function (cevap) {
+            //     $scope.dizi = cevap.data;
+            // });
+
+
+            // $http.get('http://5b5c4fcd6a725000148a6771.mockapi.io/api/Books').then(function (cevap) {
+            //     $scope.dizi = cevap.data;
+            // });
+            $scope.dizi = [{ "ad": "Terrance", "yas": 4, "cinsiyet": "erkek" },
+            { "ad": "Erika", "yas": 6, "cinsiyet": "kadin" },
+            { "ad": "Myra", "yas": 0, "cinsiyet": "kadin" },
+            { "ad": "Marcus", "yas": 7, "cinsiyet": "kadin" },
+            { "ad": "Rachmat", "yas": 2, "cinsiyet": "erkek" },
+            { "ad": "Marty", "yas": 7, "cinsiyet": "kadin" },
+            { "ad": "Roseline", "yas": 7, "cinsiyet": "erkek" },
+            { "ad": "Toni", "yas": 7, "cinsiyet": "kadin" },
+            { "ad": "Jody", "yas": 1, "cinsiyet": "erkek" },
+            { "ad": "Mitchell", "yas": 7, "cinsiyet": "erkek" }]
+            // Adı Erika olmayan ve yaşı 6dan küçük olanları donder
+            $scope.filtrele = function (deger) {
+                // if (deger.ad == 'Erika' || deger.yas > 6) {
+                //     return false;
+                // } else {
+                //     return true;
+                // }
+return true;
+
+            }
+
+            $scope.ikincifiltre = function (value) {
+              
+              if($scope.secenek1!='erkek'&& $scope.secenek2!='kadin' ){
+                  return true;
+              }else{
+                return   $scope.secenek1 == value.cinsiyet || $scope.secenek2 == value.cinsiyet;
+              }
+                  
+            }
+         
+        });
+    </script>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <input type="text" ng-model="ara">
+    Erkek :
+    <input type="checkbox" ng-true-value="'erkek'" ng-model="secenek1" name="" id=""> Kadın :
+    <input type="checkbox" ng-true-value="'kadin'" ng-model="secenek2" name="" id="">
+    <hr>
+    <ul>
+        <!-- <li ng-repeat="veri in dizi| filter:{ad:ara}  ">{{veri}}</li> -->
+        <li ng-repeat="veri in dizi| filter:filtrele |filter:ikincifiltre  ">{{veri}}</li>
+    </ul>
+    <hr> {{5+3}}
+    <hr>
+ 
+</body>
+
+</html>

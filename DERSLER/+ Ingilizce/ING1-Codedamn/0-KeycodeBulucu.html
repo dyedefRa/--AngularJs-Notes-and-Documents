@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .hh {
+            text-align: center;
+        }
+
+        .ss {
+
+            display: block;
+            margin: 0 auto;
+            padding: 5px;
+            font-size: 15px;
+            width: 200px;
+
+
+
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.eylem = function (a) {
+                //BURADA@@@
+                console.log(event.which || event.keyCode);
+            }
+        });
+
+    </script>
+
+</head>
+
+<body ng-controller="mycont">
+    <h2 class="hh">Görev Ekle</h2>
+    <input ng-keyup="eylem()" class="ss" type="text">
+   
+</body>
+
+</html>

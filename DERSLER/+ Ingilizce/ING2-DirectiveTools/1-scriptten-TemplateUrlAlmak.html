@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive('selamlar', function () {
+            return {
+             templateUrl:'wtf'
+            }
+        }
+
+        );
+        app.controller('mycont', function ($scope) {
+            $scope.deger = 'Controller';
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+
+    {{4+2}}
+    <hr>
+<!-- Burası farklı bır sayfaymıs gıbı algıladı onceye gore -->
+    <script type="text/ng-template" id="wtf">
+        <h1> Template içinden // {{deger}}   </h1>
+    </script>
+    
+    <selamlar></selamlar>
+    <hr>
+
+
+
+</body>
+
+</html>

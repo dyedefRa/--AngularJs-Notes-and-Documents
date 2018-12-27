@@ -1,0 +1,19 @@
+﻿$scope.veriler=[{'ad':'ali','soyad':'felan'}....];
+ bir dizin var.
+
+GUNCELLEME OLAYINI SILEREK YAPMAK => SILDIGININ YERIEN BU vERIYI EKLE DEMEK
+$scope.Guncelle=function(index){
+    $scope.veriler.splice(index,1,{'ad':$scope.ad,'soyad':$scope.soyad});
+
+});
+
+----------------------------------
+----@@@@@@@@@@@@@@@@@@@@@@@@
+ <div ng-style="deger==5 && {'color':'white'}" class="sinif">
+blabla
+    </div>
+
+deger==5 iken  color:white olsun ..
+--------------------------------------
+show degeri eşit olsun ; show degeri msg1 ise msg2 , degil ise msg1 olsun..=>
+$scope.show=$scope.show=='msg1' ?? 'msg2':'msg1';

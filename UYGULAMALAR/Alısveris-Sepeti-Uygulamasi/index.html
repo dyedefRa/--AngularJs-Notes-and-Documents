@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+      
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+            $scope.items = [
+                {
+                    id: 0,
+                    name: 'Ayakkabı',
+                    price: 60
+                },
+                {
+                    id: 1,
+                    name: 'Pantolon',
+                    price: 120
+                },
+                {
+                    id: 2,
+                    name: 'Ceket',
+                    price: 280
+                },
+                {
+                    id: 3,
+                    name: 'Tişört',
+                    price: 40
+                }
+            ]
+            $scope.sepettekiler = []
+              
+            $scope.sepeteEkle = function (eklenenUrun) {
+            
+              $scope.toplamTutar=0;
+                if ($scope.sepettekiler.length == 0) {
+
+                    var yeniUrun = new Object();
+                    yeniUrun.id = eklenenUrun.id;
+                    yeniUrun.name = eklenenUrun.name;
+                    yeniUrun.price = eklenenUrun.price;
+                    yeniUrun.adet = 1;
+
+
+                    $scope.sepettekiler.push(yeniUrun);
+
+                    console.log($scope.sepettekiler);
+
+
+                }
+                else {
+                    var eleman = $scope.sepettekiler.find(x => x.id == eklenenUrun.id);
+                    if (eleman == null) {
+                        var yeniUrun = new Object();
+                        yeniUrun.id = eklenenUrun.id;
+                        yeniUrun.name = eklenenUrun.name;
+                        yeniUrun.price = eklenenUrun.price;
+                        yeniUrun.adet = 1;
+
+
+                        $scope.sepettekiler.push(yeniUrun);
+
+                        console.log($scope.sepettekiler);
+
+                       }
+                    else {
+                        eleman.adet++;
+                       
+                    }
+
+
+                }
+                $scope.sepettekiler.forEach(element => {
+                    $scope.toplamTutar+=element.price*element.adet;
+                });
+          
+            }
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+    <h2>Ürünlerimiz</h2>
+    <hr>
+    <input type="text" ng-model="search">
+    <ul>
+        <li ng-repeat="item in items | filter:search">{{item.name}} - {{item.price}} TL
+            <button ng-click="sepeteEkle(item)">Ekle</button>
+        </li>
+    </ul>
+   <div style="border: 1px solid black;">
+        <h2>Sepetim <span style="font-size: 15px; font-weight: bold" ng-show="toplamTutar">- Toplam Tutar = {{toplamTutar}}</span></h2>
+  
+    <ul>
+        <li ng-repeat="urun in sepettekiler">{{urun.name}} - {{urun.adet}} adet - {{urun.price}} TL => Tutar {{urun.adet * urun.price}} </li>
+    </ul> 
+</div>
+</body>
+
+</html>

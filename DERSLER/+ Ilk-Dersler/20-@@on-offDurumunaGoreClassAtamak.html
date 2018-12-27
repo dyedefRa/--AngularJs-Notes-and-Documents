@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Select>option nın valuesine class ismi verdik ve  butonumuzun ng-class=ına selevtin ng-model ismini verdik . olay tamam seçim ile class atama yaptık -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .kirmizi {
+            background-color: red;
+            color: white;
+        }
+
+        .yesil {
+            background-color: green;
+            color: white;
+        }
+
+        .likeButton {
+            padding: 5px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+            border: 2px solid black;
+        }
+        /* .ng-hide{
+            transition: all 0.1s;
+           
+        }
+        .ng-hide-active{
+            opacity: 0.2;
+        } */
+    </style>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <select ng-model="renkSec">
+        <option value="kirmizi">Kırmızı</option>
+        <option value="yesil">Yeşil</option>
+    </select>
+
+    <hr>
+<!-- ng-class="renkSec" -->  
+ <!-- => Select olayına göre renk değiştirir buton. -->
+
+
+    <!-- ng-class="{yesil:durum,kirmizi:!durum}" -->
+    <button id="classata" ng-style="{'font-size':'25px'}"   ng-click="eylem()" class="likeButton">
+        <span ng-show="durum">On</span>
+        <span ng-show="!durum">Off</span>
+    </button>
+
+
+    {{durum}}
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', ['ngAnimate']);
+        app.controller('mycont', function ($scope) {
+
+            $scope.durum = true;
+
+            $scope.eylem = function () {
+                $scope.durum=!$scope.durum;
+                if($scope.durum){
+                    angular.element(classata).addClass('yesil');
+                    angular.element(classata).removeClass('kirmizi');
+                }else{
+                    angular.element(classata).addClass('kirmizi');
+                    angular.element(classata).removeClass('yesil');
+                }
+            };
+        });
+    </script>
+
+</body>
+
+</html>

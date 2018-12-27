@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <!-- BASIT BIR SEKILDE DIZIYI BU SEKILDE SIRALIYORUZ  -->
+
+    <!-- isim ara :
+    <input type="text" ng-model="arama">
+    <br>
+    <ul>
+        <li ng-repeat="yeah in isimler | filter:arama"> {{yeah}}</li>
+     </ul> -->
+
+    <!-- KARISIK DIZIYI SIRALAYALIM -->
+
+    <ul>
+        <li ng-repeat="veri in veriler">Adı :{{veri.ad}} , Yaş :{{veri.yas}}</li>
+    </ul>
+
+
+
+
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var myapp = angular.module('myapp', []);
+        myapp.controller('mycont', function ($scope) {
+
+            $scope.isimler = ['ali', 'veli', 'elif', 'costa', 'ready'];
+            $scope.veriler = [{ 'ad': 'Ali', "yas": 23 }, { 'ad': 'Veli', "yas": 25 }, { 'ad': 'Memo', "yas": 17 }, { 'ad': 'Furkan', "yas": 44 }]
+
+
+        })
+
+    </script>
+</body>
+
+</html>

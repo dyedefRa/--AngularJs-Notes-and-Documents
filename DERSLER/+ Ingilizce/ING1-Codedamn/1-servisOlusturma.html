@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+
+        // OLAY BURADA {
+        app.service('random', function () {
+         
+            //SayiUret propertisi yaptık.
+            this.SayiUret = function () {
+                var num = Math.floor(Math.random() * 10);
+                return num;
+            };
+        });
+        //OLAY BURADA }
+
+        app.controller('mycont', function ($scope, random) {
+            $scope.SayiUret = function () {
+                $scope.rastgeleSayi = random.SayiUret();
+            }
+        });
+    </script>
+
+</head>
+
+<body ng-controller="mycont">
+    <button ng-click="SayiUret()">SAYI URET</button>
+    <br> {{rastgeleSayi}}
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+
+$scope.fonkOlsun=function(icerigi){
+    return 'a';
+}
+        });
+
+        // app.filter('selam',function(){
+        //     return function(b){
+        //     return    b.toUpperCase();
+        //     }
+        // })
+    </script>
+    <style>
+    .ng-pristine{
+ 
+        border-color:  aquamarine;
+    }
+    .ng-dirty.ng-invalid{
+        border: 2px solid red;
+    }
+    .ng-dirty.ng-valid{
+        border: 2px solid green;
+    }
+    </style>
+</head>
+
+<body ng-app="myapp"ng-controller="mycont">
+
+    <form action="" name="formcuk" ng-submit="formcuk.$valid &&fonkOlsun(deger) "  novalidate>
+  Derece:     <strong>{{deger.yildiz}}</strong>
+        <div>
+     İçerik :     <strong>{{deger.icerik}}</strong>
+        </div>
+        <div>
+     Email :       <strong>{{deger.email}}</strong>
+          </div>
+          <hr>
+        <div>
+            <select required name="" ng-model="deger.yildiz" id="">
+                <option value="1 yildiz">1</option>
+                <option value="2 yildiz">2</option>
+                <option value="3 yildiz">3</option>
+                <option value="4 yildiz">4</option>
+                <option value="5 yildiz">5</option>
+            </select>
+           
+        </div>
+        <div>
+            <textarea minlength="10" required name="" id="" ng-model="deger.icerik" cols="30" rows="10"></textarea>
+        </div>
+       <div>
+       <input type="email" name="" ng-model="deger.email" id="">
+       </div>
+
+       <p>Form gönderilebilir : {{formcuk.$valid}} </p>
+       <button type="submit">GO</button>
+    </form>
+    
+</body>
+
+</html>

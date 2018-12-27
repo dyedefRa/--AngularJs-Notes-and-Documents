@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive('ikincipart', function () {
+            return {
+                templateUrl: '3.5-calisandetaylar.html'
+                // scope:{}
+            }
+        });
+        app.controller('mycont', function ($scope, $http) {
+            $scope.getAll = function () {
+
+                $http.get('http://5b849993db24a100142dce24.mockapi.io/employee').then(function (deger) {
+                    $scope.dizim=deger.data;
+                    $scope.id = deger.id;
+                    $scope.isim = deger.isim;
+                    $scope.maas = deger.maas;
+                    $scope.depertmanNo = deger.depertmanNo;
+                    $scope.hireDate = deger.hireDate;
+                    $scope.dob = deger.dob;
+                    console.log(deger);
+
+                });
+            }
+        });
+    </script>
+
+</head>
+
+<body ng-controller="mycont">
+    <button ng-click="getAll()"> GETIR</button>
+    <hr>
+   <ul>
+       <li ng-repeat="d in dizim">
+      <ikincipart></ikincipart>
+       </li>
+   </ul>
+</body>
+
+</html>

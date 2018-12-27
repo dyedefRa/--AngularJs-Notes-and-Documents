@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+--YARIM KALDI--
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+
+    <script>
+     var app=  angular.module('myapp', ['ngCookies']);
+        app.controller('mycont', function ($scope,$cookies) {
+            $scope.cookidenGelen = $cookies.get('wuhuu');
+
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+
+    {{4+2}}
+</body>
+
+</html>

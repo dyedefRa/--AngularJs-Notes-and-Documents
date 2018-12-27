@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- $http.get(url).then(fun) yazarak apiden degerleri cekebiliyoruz.. -->
+<!-- FILTER OLAYLARIDA YAPALIM -->
+<!-- arama ve order by olaylari-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   <style>
+   ul li{
+       
+       list-style: none;
+       padding: 10px;
+       font-weight: bold;
+       border: 2px dotted red;
+       margin: 5px;
+    /* display:inline-block; */
+   }
+   </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+   <!-- ARAMA OLAYI 1 -->
+        Arama Yap : <input type="text" ng-model="arama">
+        <br>
+
+<ul>
+    <!-- ARAMA OLAYI 2 -->
+    <!-- ORDER BY OLAYI  -->
+    <!-- '-id' yazdıgımız için orderByDescending oldu aslında -->
+    <li ng-repeat="veri in veriler |filter:arama | orderBy:'-id'">{{veri}}</li>
+</ul>
+
+
+
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var myapp = angular.module('myapp', []);
+        myapp.controller('mycont', function ($scope,$http) {
+
+          $http.get('https://jsonplaceholder.typicode.com/posts').then(function(response){
+              $scope.veriler=response.data; //.data demezsen cevabın okey ve statusCode=200 tazında bilgilerde gelıyor..
+          });  
+
+
+        })
+    
+    </script>
+</body>
+
+</html>

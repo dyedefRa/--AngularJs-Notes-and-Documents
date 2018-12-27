@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="mycont1">
+        {{yeah}}
+        <br>
+        <input type="text" ng-model="ekle1" ng-keyup="$event.keyCode==13 ? eylem():null">
+
+
+    </div>
+    <hr>
+    <div ng-controller="mycont2">
+        {{deger}}
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.factory('turkiye', function () {
+            sehirler = ['izmir', 'istanbul', 'maraş'];
+            return sehirler;
+        });
+        app.controller('mycont1', function ($scope, turkiye) {
+            $scope.yeah = turkiye;
+            $scope.eylem = function () {
+                // $scope.yeah.push($scope.ekle1);
+               turkiye.push($scope.ekle1);
+               $scope.ekle1="";
+            };
+
+        });
+
+        app.controller('mycont2', function ($scope, turkiye) {
+            $scope.deger = turkiye;
+        });
+    </script>
+</body>
+
+</html>

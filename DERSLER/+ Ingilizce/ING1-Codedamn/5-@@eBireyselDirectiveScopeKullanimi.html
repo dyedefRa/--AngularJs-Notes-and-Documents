@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive('saskomand', function () {
+            return {
+                template: '<hr><h1> {{name}} </h1>   <br> <input type="text" ng-model="deger"/> <button ng-click="isimDegis(deger)">DEGIS </button><hr>',
+                restrict: 'EA',
+                //Aynı directive imzasi ile urutteıgım elementler aynı sekılde tepki gosterıyor. Bırıne bırsey yap dedıgımde olayı tetıkledıgımde hepsı etkılenıyor.. Bu çok saçma dostum.
+
+                // scope:true DIYEREK SORUNU COZUYORSUN!!!
+                // YADA =>>      scope: {},
+
+                //  scope:false defaulltaki deger..Yani etkisi yok
+                scope: {},
+                link: function ($scope, $element, $att) {
+                    $scope.name = 'Adı değiş';
+                    $scope.isimDegis = function (yeniisim) {
+                        $scope.name = yeniisim;
+                    }
+                }
+            }
+        })
+        app.controller('mycont', function ($scope) {
+
+            //@ - Text bind
+            //= - Two way bind
+            //& - One way bind
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+
+
+    <saskomand></saskomand>
+    <saskomand></saskomand>
+
+
+
+
+
+</body>
+
+</html>

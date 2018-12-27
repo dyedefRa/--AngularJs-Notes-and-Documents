@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', ['$scope', function ($scope) {
+            $scope.labelName = 'New Button';
+            $scope.newElement = angular.element('<div class="btn btn-success">' + $scope.labelName + '</div>');
+            $scope.secondElement = angular.element('<h2>SELAM BEBEK</h2>');
+
+        }]);
+        app.directive('pageDirective', function () {
+            return {
+                restrict: 'E',
+                template: '<div> Burada yeni buton var </div>',
+                controller: 'mycont',
+                scope: '=',
+                compile: function (tElem, tAttrs) {
+
+                    console.log('compile it.This is the original compiled DOM');
+                    debugger;
+                    return {
+                        pre: function preLink(scope, iElement, iAttrs) {
+                            console.log('pre');
+                            // iElement.append(scope.secondElement);
+                            iElement.html('<div class="panel panel-primary">Now a panel </div>');
+                            debugger;
+                        },
+                        post: function postLink(scope, iElement, iAttrs) {
+                            console.log('post');
+                            iElement.append(scope.newElement);
+                            debugger;
+                        }
+                    }
+                }
+
+            }
+        });
+        app.directive('pageDirectiveIki', function () {
+            return {
+                restrict: 'E',
+                template: '<div> Burada yeni 2 buton var </div>',
+                controller: 'mycont',
+                scope: '=',
+                compile: function (tElem, tAttrs) {
+
+                    console.log('2 compile it.This is the original compiled DOM');
+                    debugger;
+                    return {
+                        pre: function preLink(scope, iElement, iAttrs) {
+                            console.log('pre 2');
+                            // iElement.append(scope.secondElement);
+                            debugger;
+                        },
+                        post: function postLink(scope, iElement, iAttrs) {
+                            console.log('post 2');
+                            iElement.append(scope.newElement);
+                            debugger;
+                        }
+                    }
+                }
+
+            }
+        });
+        app.directive('pageDirectiveUc', function () {
+            return {
+                restrict: 'E',
+                template: '<div> Burada yeni 3 buton var </div>',
+                controller: 'mycont',
+                scope: '=',
+                compile: function (tElem, tAttrs) {
+
+                    console.log('3 compile it.This is the original compiled DOM');
+                    debugger;
+                    return {
+                        pre: function preLink(scope, iElement, iAttrs) {
+                            console.log('pre3 ');
+                            // iElement.append(scope.secondElement);
+                            debugger;
+                        },
+                        post: function postLink(scope, iElement, iAttrs) {
+                            console.log('post 3 ');
+                            iElement.append(scope.newElement);
+                            debugger;
+                        }
+                    }
+                }
+
+            }
+        });
+
+    </script>
+
+</head>
+
+<body ng-controller="mycont">
+
+    <page-directive></page-directive>
+
+    <page-directive-iki></page-directive-iki>
+    <page-directive-uc></page-directive-uc>
+
+    <page-directive></page-directive>
+
+    <!-- <button class="btn btn-primary"> SA</button> -->
+    <hr> {{4+2}}
+</body>
+
+</html>
+1-Comp
+2-Comp
+3-Comp

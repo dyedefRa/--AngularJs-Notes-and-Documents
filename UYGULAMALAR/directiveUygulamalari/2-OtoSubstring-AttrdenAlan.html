@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        // GIZLE=TRUE DIRECTIVE SI
+        app.directive('gizle', function () {
+            return {
+                restrict: 'EA',
+                link: function ($scope, $element, $attr) {
+                    if ($attr.gizle == 'true') {
+                        $element.css({ 'display': 'none' });
+                    } else {
+                        $element.css({ 'display': 'block' });
+                    }
+                }
+            }
+
+        });
+
+
+        //OTO KISALTAN DIRECTIVE
+        app.directive('kisalt', function () {
+            return {
+                restrict: 'EA',
+                link: function ($scope, $element, $attr) {
+                
+                    $element.html($element.html().substring(0, $attr.kisalt));
+                    $element.append('<span style="color:red;cursor:pointer;">  devamını oku... </span>');
+                }
+            }
+
+        });
+        app.controller('mycont', function ($scope) {
+
+        });
+    </script>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    {{3+2}}
+    <div gizle='true'>
+        OKEY
+    </div>
+
+    <hr>
+    <div gizle="trues" kisalt="20">ZAALorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla in recusandae minima! Aliquid labore hic impedit tempore vel, laborum nisi recusandae repudiandae expedita! Atque ipsam delectus repudiandae perferendis hic corrupti!</div>
+    <hr>
+    <div kisalt="22">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum soluta nisi dolorem porro inventore repellat voluptatibus rerum fugit assumenda illum labore necessitatibus ratione voluptate unde, ab ipsa numquam ipsum reprehenderit.</div>
+</body>
+
+</html>

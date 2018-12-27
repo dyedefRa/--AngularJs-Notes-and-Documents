@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+TIKLADIGIN RESIM BUYYUOR!
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.r1 = "https://i1.wp.com/www.kerimusta.com/wp-content/uploads/2017/01/at-resimleri_184984.jpg";
+            $scope.r2 = "https://indigodergisi.com/wp-content/uploads/2017/05/1494118823_EpilepsiveBen_6_11Ya_____kincisi__Berat___pek-324x160.jpg";
+            $scope.r3 = "https://i0.shbdn.com/photos/49/59/96/x5_589495996an9.jpg";
+            $scope.r4 = "http://www.karstilyapi.com/images/galeri/thumb/Resim_21102017103058.jpg";
+
+            $scope.resim = $scope.r1;
+        });
+
+        app.directive("ozy", function () {
+
+            return {
+                restrict: 'AE',
+                link: function ($scope, element, attr) {
+                    element.on('click', function () {
+                        //    angular.element(degis).attr({'src':attr.src});
+                        $scope.resim = attr.src;
+                        $scope.$digest();
+                        //Üstteki de çalısıyor.
+                        //nedne $digest() yazdık. çünü farklı bir metodun içindeyiz .$scopeguncellemek gerek
+                        element.css({'border':'1px dotted red'});
+                    });
+                }
+            }
+        });
+
+    </script>
+    <style>
+        .resimler img {
+            cursor: pointer;
+            height: 100px;
+            width: 122px;
+        }
+
+        .orta img {
+            height: 500px;
+            width: 500px;
+
+        }
+    </style>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <div class="resimler">
+
+        <img ozy ng-src={{r1}} alt="">
+        <img ozy ng-src={{r2}} alt="">
+        <img ozy ng-src={{r3}} alt="">
+        <img ozy ng-src={{r4}} alt="">
+    </div>
+    <div class="orta">
+        <img id="degis" ng-src="{{resim}}" alt="">
+    </div>
+
+</body>
+
+</html>

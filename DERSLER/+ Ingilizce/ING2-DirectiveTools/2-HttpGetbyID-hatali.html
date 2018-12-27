@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+
+        app.controller('mycont', ['$scope', 'calisanlarService', function ($scope, calisanlarService) {
+            $scope.ara = function () {
+                calisanlarService.findById($scope.calisanNo, function (bulunanCalisan) {
+                    $scope.id = bulunanCalisan.id;
+                    $scope.isim = bulunanCalisan.isim;
+                    $scope.maas = bulunanCalisan.maas;
+                    $scope.depertmanNo = bulunanCalisan.depertmanNo;
+                    $scope.hireDate = bulunanCalisan.hireDate;
+                    $scope.dob = bulunanCalisan.dob;
+                    // $scope.salAbove7k = parseInt(bulunanCalisan.sal) > 7000;
+                });
+            };
+
+
+        }]);
+        app.service('calisanlarService', ['$http', '$log', function ($http, $log) {
+            this.findById = function (no, cb) {
+                $http({
+                    url:'http://5b849993db24a100142dce24.mockapi.io/employee/'+no,
+                    method:'GET'
+                    }).then(function (gelen) {
+             cb(gelen.data);
+                }, function (gelen) {
+                    console.error('HATA VAR');
+                    alert('HATA VAR');
+
+                });
+            };
+        }]);
+        app.directive('calisanDetay', function () {
+            return {
+                templateUrl: 'calisandetaylar.html'
+            }
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+    <form action="" class="form-inline">
+        <div class="form-group">
+            <label for="">No :</label>
+            <input type="text" class="form-control" ng-model="calisanNo">
+        </div>
+        <button class="btn btn-info" ng-click="ara()">Search</button>
+        <!-- <button ng-click="okey()">Al</button> -->
+    </form>
+    <hr>
+    <div calisan-detay ng-if="id!=undefined"></div>
+    <hr> {{4+2}}
+
+
+</body>
+
+</html>

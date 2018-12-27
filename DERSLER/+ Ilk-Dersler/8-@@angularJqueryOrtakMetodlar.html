@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- angular.element(SELEKTOR).JQUERYMETODLARI -->
+<!--BU LINKTE KULLANILABILECEK METODLARI SIRALANMIS https://docs.angularjs.org/api/ng/function/angular.element -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <div ng-click="eylem()" id="ele">
+        Element
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.eylem = function () {
+                
+
+                angular.element(ele).css({'background-color':'red'});
+                // angular.element(ele).addClass('selam');
+                // angular.element(ele).attr({'style':'zaa'});
+            };
+
+        });
+
+    </script>
+</body>
+
+</html>

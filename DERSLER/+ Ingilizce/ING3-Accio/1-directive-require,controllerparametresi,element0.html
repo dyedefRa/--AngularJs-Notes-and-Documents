@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Directivenin içinde element[0]. diyerek sadece o element işlem yaptırabılıyoruz.
+Bu olayi eventin içinde yaparsak çok daha verimli olacak. çünkü her element için o event içine girmeyecek..[€]  (link in içinde sağlamak için)
+
+Aynı sekilde scope:{} diyerekte bunu sağlıyoruz.-->
+
+<!-- Directivenin içindeki controller propertsi link fonksiyonundaki scope la alakalı..
+yanı ben controller:'mycont', dediğimde link'in içindeki scope mycont'un içindeki verilere ulaşabılıyor -->
+
+<!--TRANSCLUDE
+  transclude: true,
+ template: '<span ng-transclude>'</span>' + '<h1> I  am Heisenberg </h1>' -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+
+        app.directive('degisikBtn', function () {
+
+            return {
+                restrict: 'MA',
+                link: function (s, e, a) {
+                    e.addClass('btn btn-success');
+                    e.css({ 'border': a.borderpx + 'px solid red' });
+
+                    e.on('click', function () {
+                        //[€]--->
+                        //element[0] dedik. üç farklı bu directiveden olsun.
+                        //bu eventı halı dırectıve tetıkledıyse onun ıcın gecrlı
+                        e[0].innerText = "Neden Bastın";
+                    });
+
+
+
+
+                }
+            }
+        });
+
+        //------------OLAY ALTTTAA !!!!
+        //BU directivenin scope'unu kalkancontrollerdan alalım..
+        app.directive('kalkan', function () {
+            return {
+                restrict: 'E',
+                scope: {},//Tek tke davransın dıye (directiveler)
+                controller: 'kalkancontroller',
+                link: function (s, e, a) {
+                    e.bind('mouseenter', function () {
+                        console.log(s.kalkanOzellikleri)
+                    })
+                }
+            }
+        });
+        app.directive('defans', function () {
+            return {
+                require: 'kalkan',//GEREKLI
+
+                //Gerekli directive yi yazdıkyukarda.
+                //link te defans ekle metodu calıstırmak ıstedıgımız ıcın kalkanControllerı ekledık cunku metodlar orada.
+                link: function (s, e, a, kalkancontroller) {
+                    kalkancontroller.defansEkle();
+                }
+            }
+        });
+        app.directive('agirlik', function () {
+            return {
+                require: 'kalkan',//GEREKLI
+                link: function (s, e, a, kalkancontroller) {
+                    kalkancontroller.agilikEkle();
+                }
+            }
+        });
+        app.directive('hacim', function () {
+            return {
+                require: 'kalkan',//GEREKLI
+                link: function (s, e, a, kalkancontroller) {
+                    kalkancontroller.hacimEkle();
+                }
+            }
+        });
+
+        app.controller('mycont', function ($scope) {
+
+        });
+        app.controller('kalkancontroller', function ($scope) {
+            $scope.kalkanOzellikleri = [];
+
+            this.defansEkle = function () {
+
+                $scope.kalkanOzellikleri.push('Defans Eklendi :250 hr');
+            };
+            this.agilikEkle = function () {
+
+                $scope.kalkanOzellikleri.push('Ağırlık Eklendi :48 kg');
+            };
+            this.hacimEkle = function () {
+
+                $scope.kalkanOzellikleri.push('Hacim Eklendi :300m^3');
+            };
+        });
+    </script>
+</head>
+
+<body ng-app="myapp">
+
+    {{4+3}}
+
+
+
+    <div ng-controller="mycont">
+        <hr>
+        <div degisik-btn borderpx="1" class="btn btn-success">
+            BUTON 1
+        </div>
+        <br>
+        <div degisik-btn borderpx="1">
+            BUTON 2
+        </div>
+
+
+    </div>
+    <hr>-----------------------------------
+    <hr>
+    <div ng-controller="kalkancontroller">
+
+    </div>
+
+    <kalkan style="border:1px solid red;" defans agirlik hacim>Burası defans directivesi</kalkan>
+    <br>
+    <br>
+    <kalkan style="border:1px solid red;" defans>Sadece Defans Ekle</kalkan>
+
+</body>
+
+</html>

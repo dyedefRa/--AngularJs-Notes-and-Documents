@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.7.3/angular-touch.js"></script>
+    <script>
+        var app = angular.module('myapp', ['ngTouch']);
+        app.controller('mycont', function ($scope) {
+            $scope.say=0;
+        });
+    </script>
+    <style>
+        #okey {
+            height: 200px;
+            width: 200px;
+            position: fixed;
+            background: cornflowerblue;
+            color: white;
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+  
+
+
+
+  
+            {{5+3}}
+            <div ng-swipe-right="say=say+1" ng-swipe-left="say=say-1"   id='okey'>
+              {{say}}
+              
+             
+            </div>
+            
+       
+</body>
+
+</html>

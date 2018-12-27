@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<!-- 5 ile ortak sadece biraz eklenti var -->
+
+<!-- OZET  -->
+<!-- Controllerda olan bir degeri directive'in attrbutesı yardımıyla , ve scope propertisiykle üzerine alıyoruz ve Templatesine yansıtıp degıstırebılıyoruz.
+Controllerdan aldıgımız ıl deger degısmıyor... -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <style>
+    .ss{
+        transition: 1s linear ;
+    }
+    </style>
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive('saskomand', function () {
+            return {
+
+                restrict: 'EA',
+                scope: {
+                    //Directivemizin attrbutesini buradan rahatlıkla alabiliyoruz.
+                    //Ve templateye yapıştırabılıyoruz...
+
+                    ismim: '@',//Sadece Template etkileniyor. directive git {{ ile yazdık}}
+                    yasim: '=',//İkiside etkileniyor(Template ve Controllerdaki deger)  directive git düz yazdık
+                    func:'&'
+                    //BURADAKI DEGERI ATTR tenalıyoruz ve Templateye verıyoruz.!
+                }, template: ['<p> Directivedeki ismin değeri =>>>{{ismim}}</p> ',
+                    '<p>Yeni isim : <input type="text" ng-model="ismim"> (@ old için sadece burayı etklıyor)</p> ',
+                    ' --------------- <p> Directivedeki yaşın degeri =>> {{yasim}} </p>',
+                    '<p>Yeni Yaş : <input type="number" ng-model="yasim">(= old için ikisinide etkiliyor) </p>',
+                    '-------------- <p>Directive ile ALERTLE =>> <button ng-click="func()"> & UYGULA ! </button> </p>'].join('')
+
+            }
+        })
+        app.controller('mycont', function ($scope) {
+            $scope.isim = 'Controller da geliyom';
+            $scope.yas = 199;
+            $scope.alertIsim = function () {
+                alert($scope.isim);
+            }
+            //  @@1 CONTROLLERDAKI DEGERI DIRECTIVENIN ATTRBUTESINI VERIYORUZ.
+            //ATTRIBUTEDEN YUKARIDAKI GIBI TEMPLATE PROP A AKTARABILIYORUZ.
+
+            //@ - Text bind --> Sadece Text Atmak Istersek..
+            //= - Two way bind
+            //& - One way bind
+        });
+    </script>
+</head>
+
+<body ng-controller="mycont">
+    <p>İlk degerimiz 'isim' =>>>>>>>>> {{isim}}</p>
+    <p>İkinci degerimiz 'yas' =>>>>>>>>{{yas}}</p>
+    <p>
+        <button ng-click="alertIsim()">3.Secenek</button>
+    </p>
+
+<div class="ss">AAA</div>
+
+    <hr>
+    <!--  @@2 BURADAN CONTROLLERDAN TEMPLATEYE GECIS YAPABILIYORUZ -->
+
+<!-- BURADAKI FARKA IYI BAK OZELLIKLEDE ismim ve yasim daki yazdırma olayındaki... -->
+
+    <saskomand ismim='{{isim}}' yasim='yas' func="alertIsim()"></saskomand>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- SINIRSIZ ELEMENT YAPABILIRSIN . KENDI KURALLARINA GORE INPUT OLUSTURUP attr bölümüne baki yazabilirsin mesela .. 
+Html elementi oluşturmaya yarar.
+Attribute olarak da uretebılırsın -->
+
+
+<!--bir elemana class ozellıgıne kendi olsutrudugun dırectıve ıle   alert verdirebiliyoruz..
+kendi elementimizi oluşturuyoruz -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .mydiv {
+            background-color: blueviolet;
+            color: white;
+            font-size: 25px;
+            width: 50px;
+            height: 80px;
+
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+
+   
+    bu element icin
+    <mydirective>SSSS</mydirective>
+    <hr> bu class için
+
+    <div class="mydirective">SSSS
+        <h2>SAFSAF</h2>
+    </div>
+    <hr> bu da attribute için
+
+    <div mydirective>SSSS</div>
+
+    <hr>
+    <hr>
+
+    <!-- Icıne yazılan yazının 5 bırımını gostersın ve devamını goster desın ozellıklerı altta ozelbirim adlı directivede verdım -->
+    
+    <div ozelbirim="5">ASFASFS</div>
+    <hr>
+    <ozelbirim >SSSSSSSS</ozelbirim>
+    <hr>
+   
+<hr>
+
+<div goster="true">SELAM</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+        
+        });
+
+
+
+        // @@OLAY BURADAAAAA =>
+        app.directive('mydirective', function () {
+
+            return {
+                restrict: 'AC',//E=> Element, A=>Attribute, C=> Class ,M => Yorum için çalışssın..
+                transclude: true,//Oluşturduğun EA ve C lerin içindeki (htmlindeki) değerleri göstermek istiyorsan bunu yazmalısın.
+                //Artı bı de aşagıda ng-transclude zımbırtısını yazman gerek.
+                template: '<div ng-transclude></div> <div class="mydiv"> Bu neyla </div> <br>  <input type="number" >',//GERIYE BUNU HTML OLARAK DONER
+                link: function (scope, element, attrs) {
+                    // alert('deneme <br>');
+                    element.css({ 'border': '3px solid red' });
+                    element.on('click', function () {
+                        alert('Oluşturduğum ilk directiona nasıl tıklarsın ulen?' + element.html());
+                    })
+                }
+            }
+        });
+
+
+
+        app.directive('ozelbirim', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, elemet, attr) {
+
+                    elemet.css({ 'background-color': 'dimgrey', 'color': 'blue', 'width': '100%', 'padding': '20px', 'height': '100px', 'display': 'block' });
+                    elemet.html(elemet.html().substring(0, attr.ozelbirim));
+                    elemet.append('<span style="color:red"> Devamını oku ....</span>');
+
+
+
+
+                }
+            }
+        })
+
+
+        app.directive('goster', function () {
+
+            return {
+                restrict: 'A',
+                link: function (scope, element, attr) {
+                    if (attr.goster == 'true') {
+                        element.css({ 'visibility': 'visible' });
+                    }
+                    else {
+                        element.css({ 'visibility': 'hidden' });
+                    }
+                }
+
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

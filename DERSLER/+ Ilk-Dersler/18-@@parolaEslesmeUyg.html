@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        button {
+            cursor: pointer;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            background-color: brown;
+        }
+    </style>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+
+    <input type="text" ng-model="p1">
+    <br>
+    <br> Parola Onayı :
+    <br>
+    <input type="text" ng-model="p2"> <div ng-show="p1!=p2 && p2 && p1">(Şifreler uyuşmuyor)</div>
+    <br>
+    <br>
+
+    <br>
+    <button ng-disabled="p1!=p2 || !p2 ">Onayla</button>
+
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-animate.min.js"></script>
+    <script>
+
+        var app = angular.module('myapp', ['ngAnimate']);
+        app.controller('mycont', function ($scope) {
+            $scope.sonuc = true;
+          
+
+
+
+        });
+    </script>
+
+</body>
+
+</html>

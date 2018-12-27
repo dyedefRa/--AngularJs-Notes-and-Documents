@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+ng-model ile imzaladığın inputlara durumuna göre otomatik olarak bazı classlar atıyor ANgular
+inputa ng-model ver!-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .ng-invalid{
+       background-color:red;
+    }
+    .ng-valid{
+        background-color:green;
+    }
+.ng-empty{
+    background-color: dimgrey;
+}
+    .ng-pristine{
+        background-color: dimgrey;
+    }
+    /* .ng-dirty{
+        background-color: aqua;
+    } */
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+<input type="checkbox"> SEAS
+<hr>
+<br>
+SAYI GIR :<input type="number" ng-model="sayi"> <br> 
+EMAIL GIR :<input  type="email" ng-model="mail"><br>
+<button>DENE</button>
+
+<hr>
+ 
+
+<hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+        });
+
+    </script>
+</body>
+
+</html>

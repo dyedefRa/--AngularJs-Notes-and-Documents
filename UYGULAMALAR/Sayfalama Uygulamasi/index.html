@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.durum = 1;
+        });
+    </script>
+    <style>
+        .icerik {
+            width: 400px;
+         
+            padding: 30px;
+            margin-top: 10px;
+            background-color: dimgray;
+
+        }
+
+        a {
+            text-decoration: none;
+
+        }
+
+        ul li {
+            list-style-type: none;
+            display: block;
+            background-color: purple;
+            float: left;
+            margin: 2px;
+            padding: 3px;
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+           
+
+
+        }
+
+        img {
+            max-height: 200px;
+            max-width: 200px;
+            float: left;
+            margin: 10px;
+            margin-left: 0;
+        }
+        .ictekidiv{
+            margin-top:10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+    <div ng-show="durum==1" class="icerik">
+        <img src="http://staticws.biletix.com/static/images/live/event/eventimages/dolunaydayururkenVQ054.png" alt=""> <div class="ictekidiv"> 1 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit est deserunt molestias! Culpa pariatur
+        quasi asperiores vero, quos vitae placeat minima necessitatibus nobis amet modi, exercitationem, consequatur ipsam
+        sit praesentium?</div>
+    </div>
+    <div ng-show="durum==2" class="icerik">2 Sint perspiciatis incidunt quod voluptate iusto voluptatem expedita voluptatum dicta, maiores aspernatur eveniet eligendi
+        reprehenderit nobis qui, cumque distinctio totam, sequi dolorem optio aperiam ut dolor quidem voluptates. Tempore,
+        earum.
+    </div>
+    <div ng-show="durum==3" class="icerik">3 Quam, molestiae eveniet. Nemo quasi corrupti perferendis atque cupiditate voluptate autem possimus voluptates quod,
+        quam nulla veniam, officiis est at obcaecati nam quaerat iste temporibus voluptatibus incidunt provident veritatis
+        hic?
+    </div>
+    <div ng-show="durum==4" class="icerik">4 Ducimus, praesentium nam sunt aspernatur similique temporibus cupiditate fugit animi ipsa, rem magnam hic, esse alias
+        in reprehenderit vel asperiores labore assumenda? Labore quia consequatur molestias doloremque sapiente totam quam!</div>
+    <div ng-show="durum==5" class="icerik">5 Repellat magni quibusdam quasi nisi beatae, error provident modi quae optio ullam debitis consectetur enim a dicta
+        eveniet odio doloremque dolorum quo dolore exercitationem mollitia, laudantium reprehenderit earum! Earum, aliquid?</div>
+
+    <ul>
+
+        <li ng-click="durum=1">
+            1
+        </li>
+
+
+        <li ng-click="durum=2">
+            2
+        </li>
+
+        <li ng-click="durum=3">
+            3
+        </li>
+
+        <li ng-click="durum=4">
+            4
+        </li>
+
+        <li ng-click="durum=5">
+            5
+        </li>
+
+    </ul>
+
+</body>
+
+</html>

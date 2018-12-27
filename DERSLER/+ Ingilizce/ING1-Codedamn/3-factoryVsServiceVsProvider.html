@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+
+        app.service('servisten', function () {
+            this.mesaj = "Bu servisten gelen mesaj";
+        });
+        app.factory('factoriden', function () {
+            var factory = {};
+            factory.mesaj = "Bu factoryden gelen mesaj";
+            return factory;
+        });
+        app.provider('providerdan', function () {
+            var m1 = "Bu providerdan gelen mesaj";
+            return {
+                isimEkle: function (isim) {
+                    m1 += ' ' + isim;
+                },
+                $get: function () {
+                    return {
+                        mesaj: m1
+                    }
+                }
+            }
+
+
+            //------------ buna farklı bır sekılde;
+            // this.m1 = "Bu providerdan gelen mesaj";
+
+            // this.$get = function () {
+            //     return {
+            //         mesaj: this.m1
+            //     }
+
+            // }
+            //--------------------
+        });
+        app.config(function (providerdanProvider) {
+            providerdanProvider.isimEkle('yuhAQ');
+        });
+        app.controller('mycont', function ($scope, servisten, factoriden, providerdan) {
+
+            $scope.MESAJIM = [servisten.mesaj, factoriden.mesaj, providerdan.mesaj];
+        });
+
+    </script>
+</head>
+
+<body ng-controller="mycont">
+    {{ MESAJIM}}
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive("ngContextmenu", function () {
+            contextMenu = {};
+            contextMenu.restrict = "AE";
+            contextMenu.scope = {
+                "isVisible": "="
+            };
+            contextMenu.link = function (lScope, lElem, lAttr) {
+
+                lElem.on("contextmenu", function (e) {
+                    e.preventDefault();
+                    console.log("Element right clicked.");
+                    lScope.$apply(function () {
+                        lScope.$parent.isVisible = true;
+                    });
+
+                });
+                lElem.on("mouseleave", function (e) {
+                    console.log("Leaved the div");
+                    lScope.$apply(function () {
+                        lScope.$parent.isVisible = false;
+                    });
+                });
+            };
+            return contextMenu;
+        });
+        app.controller('mycont', function ($scope) {
+
+        });
+    </script>
+</head>
+
+<body>
+    <div ng-controller="mycont">
+        <div ng-contextmenu>Right Click On the Item!
+            <ul id="contextmenu-node" ng-show="isVisible">
+                <li>Item 1</li>
+                <li>Item 2</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

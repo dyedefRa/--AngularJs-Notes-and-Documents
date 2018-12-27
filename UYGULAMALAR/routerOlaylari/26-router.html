@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- angular-route.js  entegre et -->
+<!-- Sayfa yenilenmeden istediğimiz sayfaya geçebiliyoruz. -->
+
+<!-- SAYFALARI BELLIRTIGIMIZ URLLERE YONELTMEK ICIN =>
+<a href="#/hakkimizda">Hakkimizda</a> -->
+
+
+<!-- URL BELIRTMEK VE O YOLUN HANGI SAYFAAYA GITMESINI BELIRTMEK ICIN =>
+$routeProvider.when('/', {
+    templateUrl: "./views/sayfa1.html"
+}) -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+<hr>
+<a href="#/">Anasayfa</a>
+<a href="#/hakkimizda">Hakkımızda</a>
+<a href="#/error">ERROR SAYFASI</a>
+<hr>
+    <div ng-view></div>
+<hr>
+
+
+    
+    {{5+2}}
+
+
+
+    <script>
+        var app = angular.module('myapp', ['ngRoute']);
+
+
+// @@ASIRI ONEMLI
+        app.config(function ($routeProvider) {
+
+            $routeProvider.when('/', {
+                templateUrl: "./views/sayfa1.html"
+            })
+            .when("/hakkimizda", {
+                    templateUrl: "./views/sayfa2.html"
+                })
+                .when('/error',{
+                    templateUrl:"./views/error.html"
+                })
+                .otherwise({ redirectTo: '/error' });
+        });
+ 
+
+
+
+
+        app.controller('mycont', function ($scope) {
+
+
+        });
+    </script>
+</body>
+
+</html>

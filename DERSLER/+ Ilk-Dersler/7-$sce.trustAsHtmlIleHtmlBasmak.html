@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <button ng-click="eylem()"> get code</button>
+    <br>
+    <!-- @@ng-bind-html ONEMLIII 1 -->
+    <div ng-bind-html="deger"></div>
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+
+        var app = angular.module('myapp', []);
+        // @@PARAMETREYE DIKKAT 2
+        app.controller('mycont', function ($scope, $sce) {
+            $scope.deger = "";
+            $scope.eylem = function () {
+
+// BURADAKI METOD ONEMLI 3
+  $scope.deger = $sce.trustAsHtml("<h1> Merhaba Angular </h1>");
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

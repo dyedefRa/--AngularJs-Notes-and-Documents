@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .clasim{
+        background-color: red;
+        width: 100px;
+        height: 100px;
+    }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+
+    <input type="text" ng-model="modelim">
+
+    <button  ng-click="eylem()">NPUTUN DEGERI AL</button>
+ <hr>
+
+    <input ng-click="classeylemi()"  type="checkbox" ng-model="kontrol"> CLASSI ATA {{kontrol}}
+<hr>
+
+
+
+
+<div   id="etkilenen">Checkten etkilenen div</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+
+
+
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.eylem = function () {
+
+                var deger = $scope.modelim;
+                alert(deger);
+            };
+            $scope.classeylemi=function(){
+                if(!$scope.kontrol){
+angular.element(etkilenen).addClass('clasim');
+                }
+                else{
+                    angular.element(etkilenen).removeClass('clasim');
+                }
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

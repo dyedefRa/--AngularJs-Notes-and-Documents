@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ng-style css vermeye yarar Json formatıyla yazmalısın -->
+<!-- BUTONA BASTIKCA DEGER ARTTISIN VE YAZSIN, DEGER==5 OLDUGUNDA VERDIGIMIZ CSS UYGULANSIN -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .sinif {
+            background-color: red;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <!-- OLAY BURADAAAA -->
+    <div ng-style="deger==5 && {'color':'white'}" class="sinif">
+SELAM BABOS
+    </div>
+
+    <hr>
+
+    <button ng-click="deger=deger+1">Deger artır</button>
+    <hr>
+    {{deger}}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var myapp = angular.module('myapp', []);
+        myapp.controller('mycont', function ($scope, $http) {
+
+          $scope.deger=1;
+
+
+        })
+
+    </script>
+</body>
+
+</html>

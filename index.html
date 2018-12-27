@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <mynav boyu="301" aramayeri="true"></mynav>
+    <hr>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+        });
+
+        app.directive("mynav", function () {
+
+            return {
+                restrict: 'AE',
+                template: '<h1> Kullanıcı Girişi </h1>  Kullanıcı Adı: <input type="text" /> <br> Parola : <input type="password" /> ',
+                link: function ($scope, element, attr) {
+                    element.on('click', function () {
+                        var deger = attr["boyu"];
+                        var aramayeriattr=attr["aramayeri"]
+                        alert(deger+' '+ aramayeriattr);
+
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

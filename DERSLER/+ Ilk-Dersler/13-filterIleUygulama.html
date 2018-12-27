@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    <button ng-click="secilileriSil()">SIL</button> &nbsp;
+    <button ng-click="hepsiniSec()">Hepsini Seç</button> &nbsp;
+    <button ng-click="hepsiniKaldir()">Hepsini Kaldır</button>
+    <button ng-click="sifirla()">SIFIRLA</button>
+    <hr>
+
+    <div ng-show="veriler.length==0">Silinecek veri bulunamadı</div>
+
+    <ul>
+        <li ng-repeat="veri in veriler">
+            <input ng-model="veri.durum" type="checkbox"> {{veri}}</li>
+    </ul>
+<hr>
+   <div ng-show="silinenler.length>0">
+        SILILENLER
+    <ul>
+        <li ng-repeat="silinen in silinenler">{{silinen}}</li>
+    </ul>
+   </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+            $scope.veriler = [
+                { 'mesaj': 'ahmet', 'durum': false },
+                { 'mesaj': 'mehmet', 'durum': false },
+                { 'mesaj': 'veli', 'durum': false },
+                { 'mesaj': 'tunç', 'durum': false },
+                { 'mesaj': 'hakan', 'durum': false },
+                { 'mesaj': 'mustafa', 'durum': false },
+                { 'mesaj': 'tayip', 'durum': false },
+                { 'mesaj': 'furkan', 'durum': false },
+            ]
+            $scope.silinenler=[]
+            $scope.hepsiniSec = function () {
+                $scope.veriler.forEach(a => {
+                    a.durum = true;
+                });
+            }
+            $scope.hepsiniKaldir = function () {
+                // $scope.veriler.forEach(a => {
+                //     a.durum = false;
+                // });
+                var sayi=$scope.veriler.length;
+               for(var i=0;i<sayi;i++){
+                   $scope.veriler[i].durum=false;
+               }
+            }
+            $scope.secilileriSil=function(){
+                $scope.silinenler=$scope.veriler.filter(function(verim){
+                    return verim.durum==true;
+                });
+
+                $scope.veriler=$scope.veriler.filter(function(a){
+                    return a.durum==false;
+                })
+            }
+            $scope.sifirla=function(){
+                $scope.veriler = [
+                { 'mesaj': 'ahmet', 'durum': false },
+                { 'mesaj': 'mehmet', 'durum': false },
+                { 'mesaj': 'veli', 'durum': false },
+                { 'mesaj': 'tunç', 'durum': false },
+                { 'mesaj': 'hakan', 'durum': false },
+                { 'mesaj': 'mustafa', 'durum': false },
+                { 'mesaj': 'tayip', 'durum': false },
+                { 'mesaj': 'furkan', 'durum': false },
+            ]
+            $scope.silinenler=[];
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- WHERE ILE AYNI MANTIK GIBI IKI DIZININ ICINDE WHERE YAPMAYA YARIYOR WHERE -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+
+        .kir {
+            color: red;
+            font-weight: bold;
+        }
+
+        .yesil {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+<ul>
+        <li ng-repeat="veri in veriler">
+              <span class="yesil">{{veri.ad}} </span>bu şahsın borcu :
+            <span class="kir">{{veri.borc}}</span>
+            </li>
+</ul>
+    <hr>
+    BURASI FILTER METODUYLA ILGILI OLAY ALTTA <br>
+    <input type="number" ng-model="borcAra"> (kaçtan buyuk olanlar gelsin)
+    <hr>
+    <br>
+    {{yazi}}
+    <ul>
+        <li ng-repeat="isim in isimler">
+                <span class="yesil">{{isim.ad}} </span>bu şahsın borcu :
+                <span class="kir">{{isim.borc}}</span>
+        </li>
+    </ul>
+
+
+    <hr>
+    <button ng-click="eylem()">ÇALIŞTIR</button>
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+            $scope.veriler = [{ 'ad': 'ahmet', 'borc': 50 }, { 'ad': 'mehmet', 'borc': 150 }, { 'ad': 'veli', 'borc': 520 }, { 'ad': 'tunç', 'borc': 250 }, { 'ad': 'hakan', 'borc': 30 }, { 'ad': 'mustafa', 'borc': 20 }, { 'ad': 'tayip', 'borc': 450 }, { 'ad': 'furkan', 'borc': 450 },
+            ]
+
+            $scope.isimler = [];
+            $yazi="";
+
+            $scope.eylem = function () {
+
+// OLAY BURADA @@@@@@@@@@@
+                $scope.isimler = $scope.veriler.filter(function (a) {
+                    var miktar=$scope.borcAra;
+                    $scope.yazi=miktar + " ' dan büyük borcu olanlar aşagıdadır ";
+                    return a.borc>miktar;
+                });
+            }
+        });
+
+    </script>
+</body>
+
+</html>

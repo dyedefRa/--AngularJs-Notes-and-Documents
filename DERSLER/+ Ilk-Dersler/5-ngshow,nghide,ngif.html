@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ng-show='şart' yazılır ve eğer şart true ise gözükür || false ise görünürlüğü kaybeder -->
+<!-- ng-hide='false' aynı olayin tersidir. -->
+<!-- ng-if='koşul'  ng-show ile aynı tek farkı sourceden de siler o elementi -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .myclass {
+            height: 100px;
+
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+ <button ng-click="eylem()">TOOGLE</button>
+ {{toggleOlayi}}
+<br>
+    <button ng-click="deger=deger+1">Deger artır(MOD 2 OLAYI)</button>   {{deger}}
+    <hr>
+   
+    <div ng-if="deger%2==0" class="myclass">1.DIV</div>
+    <br>
+    <div ng-show="toggleOlayi" class="myclass">2.DIV</div>
+    <hr>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope, $http) {
+            $scope.deger = 0;
+            $scope.toggleOlayi=true;
+
+// BURASI ONEMLI ng-click içindeki fonksiyonu angular scope lerinde tanımladık
+            $scope.eylem=function(){
+            $scope.toggleOlayi=!$scope.toggleOlayi;
+        }
+        });
+
+        
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- ng-options="il.id as il.ad for il in iller" ile select'in model ismiyle seçilen değeri yakalıyoruz..
+    $scope.iller.unshift({ 'ad': 'Bir şehir seçiniz..' }); ile dizinin ilk indexine atıyoruz -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+<!-- ng-option burası ONEMLIIII -->
+
+    <select ng-change="eylem()" ng-model="secim" ng-options="il.id as il.ad for il in iller">
+
+    </select>
+<br>
+    {{secim}}
+    <hr>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+
+            $scope.iller = [{ 'id': 35, 'ad': 'Izmir' }, { 'id': 34, 'ad': 'İstanbul' }, { 'id': 1, 'ad': 'Adana' }, { 'id': 6, 'ad': 'Antalya' }, { 'id': 46, 'ad': 'Maraş' }];
+            // BURASI ONEMLIIII dizi.unshit('...');
+            $scope.iller.unshift({ 'ad': 'Bir şehir seçiniz..' });
+
+            //BURASI Tek parametreli dizinin oto secili gelmesi için=>>
+            //ng-option= 'il as il for il in iller' olmalı
+            //     $scope.iller = ['adıyma','saf','safas'];
+            //   $scope.iller.unshift('SEÇ');
+            //   $scope.secim=$scope.iller[0];
+
+            $scope.eylem = function () {
+                // alert($scope.secim);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-app="myapp" ng-controller="mycont">
+    
+   
+    <button id="btn">ID ile Yapalım</button>
+{{deger}}
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+<script>
+
+    var app=angular.module('myapp',[]);
+    app.controller('mycont',function($scope){
+
+document.getElementById('btn').addEventListener('click',function(){
+
+$scope.deger=Math.random();
+console.log($scope.deger);
+
+// @@BURAYA KADAR OLSAYDI deger 'i GORMEYECEKTI 
+
+// FARKLI FONKSIYONLAR VS GIBI ISLEMLER OLABILIR.. ANGULAR BUNU GORMUYOR DEGER'I YAZDIRAMIYORUM
+// $digest() Yaparak  $scope'yi guncelledik..
+
+$scope.$digest();
+
+// $apply() ise $rootScope'yi günceller..
+
+});
+
+    });
+</script>
+</body>
+</html>

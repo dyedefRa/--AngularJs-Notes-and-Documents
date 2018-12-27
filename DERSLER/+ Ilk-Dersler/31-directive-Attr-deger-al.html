@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp" ng-controller="mycont">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive('mydir', function () {
+
+            return {
+                restrict: 'EAC',
+                template: '<h1> Merhabaaa burası h1ler arası </h1>',
+                link: function ($scope, $element, $attr) {
+                    //attributesi mydir olan yada mydir elementleriyle .
+                    //ulaşabılıyoruz ve wxh= attributesının degerlerını (500x300 gibi alabılıyoruz.
+                    var width = $attr.wxh.substring(0, $attr.wxh.indexOf('x'));
+                    var height = $attr.wxh.substring($attr.wxh.indexOf('x') + 1, $attr.wxh.length);
+
+//Css verelım. Evente baglı olarak. Direkte verebılırdık.
+                    $element.on('mouseover', function () {
+                        $element.css({ 'cursor': 'pointer', 'color': 'red' });
+                        console.log(width);
+                        console.log(height);
+                    });
+                    $element.on('mouseout', function () {
+                        $element.css({ 'color': 'black' });
+
+                    })
+                }
+            }
+        });
+        app.controller('mycont', function ($scope) {
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <mydir wxh="322x5200"></mydir>
+    <hr>
+    <div mydir wxh="322x5" selam="Zaa"></div>
+
+</body>
+
+</html>

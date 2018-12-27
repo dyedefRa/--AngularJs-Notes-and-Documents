@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mycont', function ($scope) {
+$scope.selam='asfafsa';
+        });
+    </script>
+</head>
+
+<body ng-app="myapp" ng-controller="mycont">
+
+    {{5+3}}
+    <hr>
+    <input type="text" ng-model="selam | limitTo:3">
+</body>
+
+</html>

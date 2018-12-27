@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- $rootScope ile degerlerimizi public yaparak bütün controllera gosterıyoruz -->
+        <!-- // $rootScope ile tanımladığın an bütün sınıflarda gozukuyor. Yanı Public yapıyoruz!! -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myapp">
+
+
+    <div ng-controller="mycont1">
+        <p>Burası C1</p>
+
+        
+{{deger}}
+    </div>
+    <hr>
+    <div ng-controller="mycont2">
+        <p>Burası C2</p>
+
+
+
+        {{tamam}}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myapp',[]);
+        app.controller('mycont1',function($scope,$rootScope){
+            // @@BURASI COK ONEMLI @@@@@@@
+            // $rootScope ile tanımladığın an bütün sınıflarda gozukuyor. Yanı Public yapıyoruz!!
+$rootScope.deger="Selam";
+        });
+        app.controller('mycont2',function($scope,$rootScope){
+
+
+//degeri almak için =>
+$scope.tamam=$rootScope.deger;
+});
+    </script>
+
+</body>
+
+</html>
